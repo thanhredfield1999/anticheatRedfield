@@ -1,0 +1,16 @@
+schema-version: 1
+enforcement: OBSERVE
+challenge-ttl-millis: 10000
+max-payload-bytes: 4096
+max-evidence-records: 256
+packet-adapter: auto
+movement:
+  horizontal-allowance-per-tick: 0.8
+  vertical-allowance-per-tick: 0.9
+  max-coordinate-magnitude: 30000000.0
+  teleport-confirm-timeout-ticks: 40
+  velocity-grace-ticks: 3
+  max-elapsed-ticks: 20
+  max-violation-score: 10.0
+  violation-increment: 1.0
+  violation-decay-per-tick: 0.05

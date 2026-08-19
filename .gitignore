@@ -1,0 +1,31 @@
+# Gradle
+.gradle/
+**/build/
+
+# Disposable Paper runtime (contains generated state and local secrets)
+spike-server/
+
+# Separate nested Git repository
+spikes/fabric-client-spike/
+
+# Local IDE / OS files
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Secrets and local configuration
+.env
+.env.*
+*.pem
+*.key
+credentials.json
+secrets.yml
+
+# Fabric client local state
+spikes/fabric-client-spike/.minecraft/
+spikes/fabric-client-spike/run/

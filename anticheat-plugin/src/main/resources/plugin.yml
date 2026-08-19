@@ -1,0 +1,22 @@
+name: HybridAnticheat
+version: '${version}'
+main: vn.heomc.anticheat.paper.HybridAnticheatPlugin
+api-version: '1.21'
+authors: [HeoMC]
+description: Observe-only verifier signal plugin.
+softdepend: [packetevents]
+commands:
+  hac:
+    description: HybridAnticheat admin status and reload
+    usage: /hac [status|reload]
+    permission: hybridanticheat.admin
+permissions:
+  hybridanticheat.admin:
+    default: op
+channels:
+  - heomc:verifier
+  - heomc:verifier_v1
+  - hac:challenge
+  - hac:response
+  - hac:result
+

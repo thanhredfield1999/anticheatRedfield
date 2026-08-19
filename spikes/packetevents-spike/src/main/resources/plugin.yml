@@ -1,0 +1,7 @@
+name: HeoMCPacketEventsSpike
+version: '${version}'
+main: vn.heomc.anticheat.spike.PacketEventsSpikePlugin
+api-version: '1.21'
+authors: [HeoMC]
+description: Disposable PacketEvents compatibility probe; not production anticheat.
+softdepend: [packetevents]

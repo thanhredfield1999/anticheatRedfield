@@ -1,0 +1,7 @@
+name: HeoMCProtocolLibSpike
+version: '${version}'
+main: vn.heomc.anticheat.spike.ProtocolLibSpikePlugin
+api-version: '1.21'
+authors: [HeoMC]
+description: Disposable ProtocolLib compatibility probe; not production anticheat.
+softdepend: [ProtocolLib]

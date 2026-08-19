@@ -1,0 +1,17 @@
+name: HeoMCAntiCheatSpike
+version: '${version}'
+main: vn.heomc.anticheat.spike.PaperSpikePlugin
+api-version: '1.21'
+authors: [HeoMC]
+description: Disposable compatibility spike; not production anticheat.
+commands:
+  acspike:
+    description: Control disposable anti-cheat compatibility spike.
+    permission: acspike.admin
+permissions:
+  acspike.admin:
+    default: op
+
+channels:
+  - heomc:verifier
+  - heomc:verifier_v1
