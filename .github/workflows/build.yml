@@ -32,3 +32,11 @@ jobs:
 
       - name: Test and build
         run: ./gradlew clean test build --no-daemon --console=plain
+
+      - name: Upload plugin JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: hybrid-anticheat-${{ github.sha }}
+          path: anticheat-plugin/build/libs/*.jar
+          if-no-files-found: error
+          retention-days: 14
