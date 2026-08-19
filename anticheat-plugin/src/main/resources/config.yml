@@ -6,7 +6,7 @@ max-evidence-records: 256
 packet-adapter: auto
 movement:
   horizontal-allowance-per-tick: 0.8
-  vertical-allowance-per-tick: 0.9
+  vertical-allowance-per-tick: 4.0
   max-coordinate-magnitude: 30000000.0
   teleport-confirm-timeout-ticks: 40
   velocity-grace-ticks: 3

@@ -65,7 +65,7 @@ public final class HybridAnticheatPlugin extends JavaPlugin implements Listener,
         movementServerTick = new AtomicLong();
         movementAdapter = new MovementPacketAdapter(this, evidence, movementServerTick,
                 positiveMovementDouble("movement.horizontal-allowance-per-tick", 0.8),
-                positiveMovementDouble("movement.vertical-allowance-per-tick", 0.9),
+                positiveMovementDouble("movement.vertical-allowance-per-tick", 4.0),
                 positiveMovementDouble("movement.max-coordinate-magnitude", 30_000_000.0),
                 positiveMovementLong("movement.max-elapsed-ticks", 20),
                 positiveMovementLong("movement.teleport-confirm-timeout-ticks", 40),

@@ -41,6 +41,15 @@ class MovementSimulatorTest {
     }
 
     @Test
+    void normalFallSpeedIsAccepted() {
+        MovementSimulationInput input = new MovementSimulationInput(
+                sample(10, 0, 64, 0), sample(11, 0, 60.1, 0), 1, 0.8, 4.0, MovementExemption.NONE);
+
+        assertEquals(MovementValidationResult.Status.ACCEPTED,
+                simulator.evaluate(input).status());
+    }
+
+    @Test
     void inputRequiresPositiveFiniteLimits() {
         assertThrows(IllegalArgumentException.class, () -> new MovementSimulationInput(
                 sample(1, 0, 64, 0), sample(2, 0, 64, 0), 1, 0, 1, MovementExemption.NONE));
