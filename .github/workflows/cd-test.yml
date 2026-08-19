@@ -1,0 +1,64 @@
+name: CD test
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'test-*'
+
+permissions:
+  contents: read
+
+env:
+  JAVA_VERSION: '21'
+
+jobs:
+  deploy-test-bundle:
+    name: Build test deployment bundle
+    runs-on: ubuntu-latest
+    environment: test
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ env.JAVA_VERSION }}
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Make Gradle wrapper executable
+        run: chmod +x gradlew
+
+      - name: Test and build plugin
+        run: ./gradlew clean test build --no-daemon --console=plain
+
+      - name: Validate test JAR
+        shell: bash
+        run: |
+          set -euo pipefail
+          jar_file="anticheat-plugin/build/libs/HybridAnticheat-0.1.0-mvp.jar"
+          test -f "$jar_file"
+          jar tf "$jar_file" | grep -Fx 'plugin.yml'
+          sha256sum "$jar_file" | tee test-jar.sha256
+
+      - name: Create test deployment bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p test-deployment/plugins
+          cp anticheat-plugin/build/libs/HybridAnticheat-0.1.0-mvp.jar test-deployment/plugins/
+          cp test-jar.sha256 test-deployment/
+          printf 'target=test\nmode=OBSERVE\n' > test-deployment/DEPLOYMENT.txt
+
+      - name: Upload test deployment bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-deployment-${{ github.sha }}
+          path: test-deployment/
+          if-no-files-found: error
+          retention-days: 14
