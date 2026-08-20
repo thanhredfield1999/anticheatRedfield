@@ -52,7 +52,18 @@ public final class MovementState {
             return new MovementValidationResult(MovementValidationResult.Status.OUT_OF_ORDER,
                     "tick-overflow", 0, 0);
         }
-        MovementExemption activeExemption = exemptionWindow != null && exemptionWindow.activeAt(current.serverTick())
+        if (elapsed <= 0) {
+            return new MovementValidationResult(MovementValidationResult.Status.OUT_OF_ORDER,
+                    "tick-order", 0, 0);
+        }
+        if (exemptionWindow != null && !exemptionWindow.activeAt(current.serverTick())) {
+            exemptionWindow = null;
+            previous = current;
+            exemption = MovementExemption.NONE;
+            return new MovementValidationResult(MovementValidationResult.Status.ACCEPTED,
+                    "initial-sample", 0, 0);
+        }
+        MovementExemption activeExemption = exemptionWindow != null
                 ? exemptionWindow.reason() : MovementExemption.NONE;
         MovementSimulationInput input;
         try {
